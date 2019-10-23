@@ -1,0 +1,79 @@
+.to-do{
+
+    position: relative;
+    width:100%;
+    min-width:500px;
+    border:2px solid black;
+    margin:20px auto;
+    height:auto;
+    min-height:700px;
+    background: rgb(255, 249, 193);
+}
+
+#items{
+
+    width:8
+    0px;
+    height:100px;
+    min-width:200px;
+    border: 1px solid black;
+    margin: 80px auto;
+    text-align: center;
+    background: black;;
+
+    
+}
+
+
+
+#input-bar{
+   margin-top: 30px;
+   height:40px;
+   width : auto;
+   font-size: 30px;
+  
+}
+
+#add-button{
+
+    position: relative;
+    width:60px;
+    height:30px;
+    border: 3px solid white;
+    float: right;
+    text-align: center;
+    padding-top:10px;
+    font-weight: bold;
+    margin:30px 30px 0px 0px;
+    background: black;
+    color:white;
+
+    
+}
+
+#container{
+    position: relative;
+    width: 80%;
+    height: 100%;
+    min-width: 300px;
+    border: 2px solid black;
+    display: block;
+    background: rgb(247, 124, 124);
+    margin: 0 auto;
+}
+
+.tasks-container{
+    display: inline-block;
+    max-width: 300px;
+    position: relative;
+    width: 80%;
+    height: auto;
+    background: white;
+    margin: 30px;
+    min-height: 200px;
+}
+
+#title{
+ height:30px;
+ font-weight: bold;
+}
