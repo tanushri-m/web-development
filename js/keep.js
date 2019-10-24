@@ -3,11 +3,10 @@ var addButton = document.getElementById("add-button");
 var pendingItems = document.getElementById("pending-items");
 var completedItems = document.getElementById("completed-items");
 
-var count = 0;
 var num = document.getElementById("number");
 
 addButton.addEventListener("click", () => {
-    if(inputBar.value.length == 0){
+    if(inputBar.value.trim().length == 0){
         return;
     }
 
