@@ -1,7 +1,7 @@
 body{
     margin:0;
     max-height:100%;
-    background: black;
+    background: #131313;
 }
 
 
@@ -14,14 +14,16 @@ body{
 }
 
 #items{
-    width: 60%;
+    width: 85%;
     height: 100px;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 
 h1{
+    margin-top: 30px;
     text-align: center;
     font-size: 55px;
+    color:white;
 }
 
 input{
@@ -31,29 +33,37 @@ input{
 }
 
 #input-bar{
-   height: 40px;
-   width: 80%;
+   height: 55px;
+   width: 88%;
    font-size: 20px;
    display: inline-block;
-   border: 1px dashed black;
    font-family: 'Lucida Sans', 'Lucida Sans Regular';
-   background: #201f1f;
+   background: white;
    box-shadow: 1px 2px 2px 2px #1f1d1d;
-   color: white;
+   color: black;
    text-align: center;
+   font-weight: bolder;
+   margin: 10px auto;
+   
     
+}
+
+#input-bar::placeholder{
+    color:black;
+    font-weight: bold;
+    letter-spacing: 1px;;
 }
 
 #add-button{
     
     width: 10%;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 15px;
     background: #201f1f;
     color: white;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     display: inline-block;
-    font-size: 22px;
+    font-size: 25px;
     font-weight: bolder;
 }
 
@@ -64,7 +74,7 @@ input{
 
 #container{
     position: relative;
-    width: 60%;
+    width: 80%;
     min-width: 300px;
     display: block;
     text-align: center;
@@ -82,49 +92,49 @@ input{
     font-size:20px;
     border-radius: 5%;
     vertical-align: top;
+    padding-bottom: 20px;
+    box-shadow: 5px 8px 19px 1px #000000;
+
 }
 
 #pending-items{
 
-background: #ea0769;
+background: #302d2e;
 }
 
 #pending-items div{
   
-    background: #3c3c3c;
-    box-shadow: -1px 7px 20px black;
-    color: white;
+    background: #e90770;
+    box-shadow: 1px 0px 5px 0px black;
+    color: #0f0a0d;
+    font-weight: bold;
+    
     
 }
 
 #pending-items div:hover{
-    box-shadow: 1px 8px 9px 9px black;
-    background: #646464;
-    padding: 5px;
     transition: all 0.5s ease out;
-    color:black;
+    color:white;
     font-weight: bold;
 }
 
 #completed-items{
 
-    background: #ea0769;
+    background: #302d2e;
 }
 
 #completed-items div{
  
-    BACKGROUND: #121b2b;
-    box-shadow: 2px 0px 3px 0px white;
-    color: white;
-}
-
-#completed-items div:hover{
-    
-    padding: 5px;
-    box-shadow: 3px 3px 3px 2px #d2ccd7;
-}
+    background: rgb(42, 185, 142);
+    box-shadow: -1px 4px 9px 2px #333131;
+    color: rgb(24, 22, 22);
+    font-weight: bolder;
 
 }
+
+
+
+
 span{
     vertical-align: super;
 }
@@ -141,9 +151,11 @@ width: 80%;
  font-size:20px;
  text-transform: uppercase;
  margin: 10px;
- background: #ea0769;
- border: #e90aa2;
- COLOR:WHITE;
+ background: #302d2e;
+ COLOR: WHITE;
+ border: none;
+ letter-spacing: 1px;
+ padding-left: 50px;
 
 }
 
@@ -151,4 +163,12 @@ width: 80%;
     color:white;
 }
 
-
+@media only screen and (orientation : portrait) { 
+    
+    .tasks-container{
+        display: block;
+        max-width: 80%;
+        margin:30px auto;
+        border-radius: 20px;
+    }
+}
