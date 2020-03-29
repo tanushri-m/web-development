@@ -20,11 +20,12 @@ import Utility from './utility.js'
 
     updateTime () {
         this.time = Utility.destinationTime(this.timezone);
-        this.period = Utility.getCurrentPeriod(this.time, this.time.getHours(), this.days);
+        this.period = Utility.getCurrentPeriod(this.time, this.days);
     }
 
     createCurrentView(){
-        let getTime = Utility.getCurrentPeriod(this.time, this.time.getHours(), this.days);
+        let currentDate = Utility.getCurrentDate(this.time, this.days)[0];
+        let getTime = Utility.getCurrentPeriod(this.time, this.days);
         let html = ` <span id = "current_country">${this.city},</span><span id ="country">${this.country}</span>
                         <div class = "lat">
                             <span class = "lat_lon">LAT ${this.location.lat}</span><span class="lat_lon">LON ${this.location.lon}</span>
@@ -37,12 +38,12 @@ import Utility from './utility.js'
                                 </div>
                                 <div class = "present_temp">
                                     <span class ="temprature">
-                                        <div class="degree">${Utility.roundNumber(getTime.temp_min)}<sup>°c</sup></div>
+                                        <div class="degree">${Utility.roundNumber(Utility.getMinTemprature(currentDate.period))}<sup>°c</sup></div>
                                         <div class="detail">MIN</div>
                                     </span>
                                     <span id ="border-right"></span>
                                     <span class ="temprature">
-                                        <div class="degree">${Utility.roundNumber(getTime.temp_max)}<sup>°c</sup></div>
+                                        <div class="degree">${Utility.roundNumber(Utility.getMaxTemprature(currentDate.period))}<sup>°c</sup></div>
                                         <div class="detail">MAX</div>
                                     </span>
                                 </div>

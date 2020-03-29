@@ -201,13 +201,13 @@ export default class Utility {
         return periods.reduce( (acc, cur) => Math.max(acc, cur.temperature), -10000);
     }
 
-    static getCurrentPeriod (date, currentHour, days) {
-       
+    static getCurrentPeriod (date, days) {
+       let  currentHour = date.getHours();
        if(currentHour%3 != 0){
             currentHour -= currentHour%3; 
             currentHour = Math.max(currentHour, 0);
        }
-       let currentDay =  this.getCurrentDate(date, days)[0];
+       let currentDay =  Utility.getCurrentDate(date, days)[0];
        let filteredDate = currentDay.period.filter(period => {
            let time = new Date(period.time);
            return time.getHours() === currentHour;
