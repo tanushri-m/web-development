@@ -182,7 +182,9 @@ sup{
     background: #f2f2f2;
     border-radius: 20px;
     padding: 35px;
-    box-shadow: 7px 7px 6px #00000026, -7px -7px 6px #ffffff54, inset 10px 9px 6px #e1e1e154;
+    box-shadow: inset 7px 7px 6px #00000026, 
+                inset -7px -7px 8px #ffffff54, 
+                inset 10px 9px 13px #e1e1e154;
 }
 .nextDay_temp {
     display: flex;
