@@ -13,6 +13,9 @@ class WeatherController {
     }
 
     updateCity(cityName) {
+        if(cityName == undefined || cityName.trim().length == 0)
+            return;
+
         return this.weatherAPI
                 .getWeather(cityName)
                 .then(data => this.updateView(data))

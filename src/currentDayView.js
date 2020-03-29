@@ -112,16 +112,12 @@ import Utility from './utility.js'
 
   render() {
     let container = document.querySelector("#weather-container");
-    if(container.innerHTML === ""){
-       let elements = `${this.remainingIntervalsHTML()} ${this.renderLeftDays()}`;
-       container.insertAdjacentHTML("beforeend",elements);
-    }
-    else{
-       container.innerHTML = "";
-       let elements = `${this.remainingIntervalsHTML()} ${this.renderLeftDays()}`;
-       container.insertAdjacentHTML("beforeend",elements);
-       
-    }
+    let elements = `<div class="card-content">
+                        ${this.remainingIntervalsHTML()} 
+                        ${this.renderLeftDays()}
+                    </div>`;
+    container.innerHTML = "";
+    container.insertAdjacentHTML("beforeend",elements);  
   }
 
   clearContainer(){
