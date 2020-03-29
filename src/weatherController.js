@@ -25,10 +25,10 @@ class WeatherController {
 
 let addEvent = function(){
     let element = document.getElementById("search");
-    element.addEventListener("blur",(event)=> execute(event.target.value));
     element.addEventListener('keyup', (event) => {
         if (event.keyCode == 13 || event.which == 13) {
             execute(event.target.value);
+            event.target.blur();
             event.preventDefault();
         }
     });
