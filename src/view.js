@@ -1,0 +1,3 @@
+class WeatherView {
+    constructor(day)
+}
