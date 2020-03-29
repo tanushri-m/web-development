@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports ={
     entry: [
             path.resolve(__dirname, './src/weatherController.js'),
-            path.resolve(__dirname, './scss/main.scss')
+            path.resolve(__dirname, './scss/main.scss'),
+            path.resolve(__dirname, './image/favicon.ico')
     ],
     output:{
         path: path.resolve(__dirname, './dist'),
@@ -24,6 +25,17 @@ module.exports ={
                 {
                     loader : 'sass-loader'
                 }
+            ],
+          },
+          {
+            test: /\.ico$/i,
+            use: [
+                {
+                    loader: 'file-loader',
+                    options: {
+                        name: 'favicon.ico'
+                    }
+                },
             ],
           },
         ],
