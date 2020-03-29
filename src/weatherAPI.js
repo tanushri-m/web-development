@@ -26,10 +26,26 @@ class WeatherAPI {
         return days;
     }
 
+    fetchData(url) {
+        return new Promise((resolve, reject) => {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState !== 4) return;
+                if (xhr.status === 200) {
+                    resolve(xhr.responseText);
+                }
+                else {
+                    reject(xhr.statusText);
+                }
+            };
+            xhr.send();
+        });
+    }
     getWeather(city){
         let weatherApi = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${this.apiKey}`;
-        return fetch(weatherApi)
-                .then(response => response.json())
+        return this.fetchData(weatherApi)
+                .then(response => JSON.parse(response))
                 .then(data => this.transformData(data));
     }
 }

@@ -40,5 +40,3 @@ let execute = function(query){
 }
 
 addEvent();
-
-
