@@ -9,10 +9,17 @@ import Utility from './utility.js'
             lat : cityData.coord.lat,
             lon : cityData.coord.lon,
         },
+        this.timezone = cityData.timezone;
+        
+        this.updateTime();
+
         this.sunrise = Utility.convertToDate(cityData.sunrise);
         this.sunset = Utility.convertToDate(cityData.sunset);
         this.population = cityData.population;
-        this.time = Utility.destinationTime(cityData.timezone);
+    }
+
+    updateTime () {
+        this.time = Utility.destinationTime(this.timezone);
         this.period = Utility.getCurrentPeriod(this.time, this.time.getHours(), this.days);
     }
 
@@ -44,7 +51,7 @@ import Utility from './utility.js'
                         <div id = "currentTimeAndDate">
                             <div id = "current_Date">
                                 <span class="date">${this.time.getDate()}<sup>${Utility.getDateSuffix(this.time.getDate())}</sup></span>
-                                <span class="month">${Utility.getMonth(this.time.getMonth())},</span>
+                                <span class="month">${Utility.getMonth(this.time.getMonth()+1)},</span>
                                 <span class="year">${this.time.getFullYear()}</span>
                             </div>
                             <div id = "current_Time">${Utility.getCurrentTime(this.time)}</div>
@@ -53,14 +60,11 @@ import Utility from './utility.js'
     return html;
    }
 
-   
-
-
    createRemainigIntervals(){
       let leftArray =  Utility.leftIntervals(this.time, this.days);
       return leftArray.map(period =>  `<div class = "next_Interval">
-                                       <div class = "temp_min">${Utility.roundNumber(period.temp_min)}<sup>°c</sup></div>
-                                        <div class = "nextTime">${Utility.createHour(period.time)}</div>
+                                        <div class = "temp_min">${Utility.roundNumber(period.temp_min)}<sup>°c</sup></div>
+                                        <div class = "nextTime">${Utility.createHour(period.time.getHours())}</div>
                                         </div>`
                                     
                                 ).join("");
@@ -105,25 +109,39 @@ import Utility from './utility.js'
        return`<div class = "Next__DayReport">${nextDays}</div>`;
 }
 
-   //renderCurrentView(){
-   // return `<div class = "viewhtml">${this.renderViewHTML()}${this.remainingIntervalsHTML()} ${this.renderLeftDays()} </div>`;
-  //}
+  render() {
+    let container = document.querySelector("#weather-container");
+    if(container.innerHTML === ""){
+       let elements = `${this.remainingIntervalsHTML()} ${this.renderLeftDays()}`;
+       container.insertAdjacentHTML("beforeend",elements);
+    }
+    else{
+       container.innerHTML = "";
+       let elements = `${this.remainingIntervalsHTML()} ${this.renderLeftDays()}`;
+       container.insertAdjacentHTML("beforeend",elements);
+       
+    }
+  }
 
   clearContainer(){
-     let container = document.querySelector("#weather-container");
-     if(container.innerHTML === ""){
-        let elements = `${this.remainingIntervalsHTML()} ${this.renderLeftDays()}`;
-        container.insertAdjacentHTML("beforeend",elements);
-     }
-     else{
-        container.innerHTML = "";
-        let elements = `${this.remainingIntervalsHTML()} ${this.renderLeftDays()}`;
-        container.insertAdjacentHTML("beforeend",elements);
-        
-     }
+    this.render();
 
+    if(refreshHandler != -1){
+        clearInterval(refreshHandler);
+    }
+
+    refreshHandler = setInterval(() => {
+        let currentMinute = this.time.getMinutes();
+        this.updateTime();
+        let newMinute = this.time.getMinutes();
+
+        if(currentMinute != newMinute){
+            this.render();
+        }
+     }, 500)
   }
 }
 
+let refreshHandler = -1;
 export default CurrentDay;
 

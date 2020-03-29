@@ -7,6 +7,23 @@ export default class Utility {
         return kelvin - 273.15;
     }
 
+    static getTwoCharNumber(num) {
+        if(num <10) {
+            return "0"+num;
+        }
+        return "" + num;
+    }
+    
+    static getDisplayHour(hour) {
+        let displayHr = hour%12;
+        displayHr = displayHr == 0 ? 12 : displayHr;
+        
+        return {
+            hour : displayHr,
+            mode : (hour >= 12) ? "PM" : "AM"
+        };
+    }
+
     static destinationTime(timezone){
         let time = new Date();
         let currentLocalTime = time.getTime();
@@ -46,32 +63,11 @@ export default class Utility {
         return currentObject;
     }
 
-    static timeConversions(time, min){
-        if(time > 12) {
-            if(min < 10){
-            return "0"+ time-12 +":"+ "0"+ min +" "+"PM";
-            }
-        
-            return "0"+ time-12 +":"+ min +" "+"PM";
-
-        }
-        else{ if(time > 9 && time <= 12){
-                 if(min < 10){
-                return  time +":"+ "0"+ min +" "+"AM";
-                }
-            
-                return  time +":"+ min +" "+"AM";
-            }
-            else{
-                if(min < 10){
-                    return  time +":"+ "0"+ min +" "+"AM";
-                    }
-                
-                    return "0"+ time +":"+ min +" "+"AM";
-            }
-        }
-
-        
+    static timeConversions(hour, min){
+        let displayHour = Utility.getDisplayHour(hour);
+        return  Utility.getTwoCharNumber(displayHour.hour) + ":" +
+                Utility.getTwoCharNumber(min) + " " +
+                displayHour.mode;
     }
 
     static getDayintoMin(min){
@@ -79,19 +75,17 @@ export default class Utility {
     }
 
     static leftIntervals(time, days) {
-        let currentDate = this.getCurrentDate(time, days);
-        let currentZone = this.overlappingTime(time,days);
-        let currentTime = currentZone.time.getHours();
+        let currentDate = this.getCurrentDate(time, days)[0];
+        let currentHour = time.getHours();
        
-        let periods = currentDate[0].period;
-        let result = periods.map(period =>{
+        let result = currentDate.period.map(period => {
             return{
-                delta : Math.abs(period.time.getHours() - currentTime),
-                obj   : period
+                delta : Math.abs(period.time.getHours() - currentHour),
+                period   : period
             }
         }).sort((periodA, periodB) =>(periodA.delta - periodB.delta))
-         .slice(0,3).map(period =>period.obj).sort((periodA, periodB) =>periodA-periodB);
-        
+         .slice(0,3).map(period => period.period)
+         .sort((periodA, periodB) => periodA.time.getHours() - periodB.time.getHours());
 
         return result;
 
@@ -126,18 +120,15 @@ export default class Utility {
     }
 
     static createHour(hour) {
-        let hr = hour.getHours();
-        if(hr > 12)
-         return hr -12 +" "+"PM";
-        else{
-            return hr + " " + "AM";
-        }
+        let displayHour = Utility.getDisplayHour(hour);
+        return displayHour.hour + " " + displayHour.mode;
     }
 
     static getCurrentTime(date) {
         let hour = date.getHours();
         let min = date.getMinutes();
         let time = this.timeConversions(hour,min);
+
         return time;
     }
 
