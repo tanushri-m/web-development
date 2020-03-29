@@ -216,7 +216,6 @@ export default class Utility {
             currentHour -= currentHour%3; 
             currentHour = Math.max(currentHour, 0);
        }
-       console.log(currentHour);
        let currentDay =  this.getCurrentDate(date, days)[0];
        let filteredDate = currentDay.period.filter(period => {
            let time = new Date(period.time);

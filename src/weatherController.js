@@ -25,7 +25,6 @@ let addEvent = function(){
     element.addEventListener("blur",(event)=> execute(event.target.value));
     element.addEventListener('keyup', (event) => {
         if (event.keyCode == 13 || event.which == 13) {
-            console.log(event);
             execute(event.target.value);
             event.preventDefault();
         }
