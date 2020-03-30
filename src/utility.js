@@ -187,9 +187,9 @@ export default class Utility {
 
 
     static leftDays(time, days){
-        let currentDate = this.getCurrentDate(time, days);
-        let compare = currentDate[0].day.getDate();
-        let afterDays = days.filter(ele => ele.day.getDate() >compare ).slice(0,2);
+        let currentDate = this.getCurrentDate(time, days)[0];
+        let compare = currentDate.day.getTime();
+        let afterDays = days.filter(ele => ele.day.getTime() > compare ).slice(0,2);
         return afterDays;
     }
 
