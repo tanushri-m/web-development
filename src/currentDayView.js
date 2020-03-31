@@ -81,10 +81,10 @@ import Utility from './utility.js'
      leftDaysHTML(){
         let nextDays = Utility.leftDays(this.time,this.days);
         return nextDays.map(day =>  `<div class = "next_Day">
-                                    <i class="weather-icon fa ${Utility.getWeatherIcon(day.period[3].weather)}"></i>
+                                    <i class="weather-icon fa ${Utility.getWeatherIcon(day.period[4].weather)}"></i>
                                      <div class = "nextDay_temp">
                                      <div class = "temp">
-                                     <div class = "curr_temp">${Utility.roundNumber(day.period[3].temperature)}<sup>°c</sup></div>
+                                     <div class = "curr_temp">${Utility.roundNumber(day.period[4].temperature)}<sup>°c</sup></div>
                                      </div>
                                      <div class = "nextDayTemperatures">
                                      <div class ="temp_minMax">

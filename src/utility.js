@@ -202,17 +202,16 @@ export default class Utility {
     }
 
     static getCurrentPeriod (date, days) {
-       let  currentHour = date.getHours();
-       if(currentHour%3 != 0){
-            currentHour -= currentHour%3; 
-            currentHour = Math.max(currentHour, 0);
-       }
+       let  currentTime = date.getTime();
        let currentDay =  Utility.getCurrentDate(date, days)[0];
-       let filteredDate = currentDay.period.filter(period => {
-           let time = new Date(period.time);
-           return time.getHours() === currentHour;
-        });
-      return filteredDate[0];  
+       let filteredDate = currentDay.period.map(period => {
+           return {
+               delta : Math.abs(period.time - currentTime),
+               period : period
+           }
+        }).sort( (deltaA, deltaB) => deltaA.delta - deltaB.delta );
+
+      return filteredDate[0].period;  
     }
 
     static getWeatherIcon(condition){
